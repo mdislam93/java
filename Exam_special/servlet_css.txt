@@ -1,0 +1,45 @@
+/* 
+    Document   : style
+    Created on : 4 Jul, 2023, 3:56:55 PM
+    Author     : Sanket Mal
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body{
+    background-color: pink ;
+}
+#submit{
+    background-color:greenyellow;
+    margin-left: 40px;
+}
+
+#age{
+    margin-left: 42px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 250px;
+    height:25px;
+    border-style: solid;
+    background-color: khaki;
+}
+#fn{
+    margin-top: 15px;
+    width: 250px;
+    height:25px;
+    border-style: solid;
+    background-color: khaki;
+}
+#ln{
+    margin-top: 15px;
+    width: 250px;
+    height:25px;
+    border-style: solid;
+    background-color: khaki;
+}
+.container{
+    margin-top: 150px;
+}

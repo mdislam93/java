@@ -1,0 +1,98 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package databaseconnection;
+import java.io.*;
+import java.sql.*;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Sanket Mal
+ */
+public class DatabaseConnection {
+static final String url="jdbc:mysql://localhost:3306/advancejava";
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)throws ClassNotFoundException {
+        try{
+            Scanner sc=new Scanner(System.in);
+            System.out.println("1.Insert \n  2.Update \n 3. Delete \n 4. Display");
+            System.out.println("Enter your choice : ");
+            int choice=sc.nextInt();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection(url,"root","");
+            Statement stmt=con.createStatement();
+            switch (choice)
+            {
+                case 1:
+                {
+                    System.out.println("Enter the first name : ");
+                    String firstname=sc.next();
+                    System.out.println("Enter the last name : ");
+                    String lastname=sc.next();
+                    System.out.println("Enter the  age : ");
+                    int age= sc.nextInt();
+                    int result=stmt.executeUpdate("insert into registration(`FIRST_NAME`,`LAST_NAME`,AGE)values("+"'"+firstname+"','"+lastname+"',"+age+")");
+                    if(result >0)
+                        System.out.println("Sucessfully insertion completed...");
+                    else
+                        System.out.println("Unsucessul insertion...");
+                    
+              }
+            break;
+           case 2:
+           {
+               System.out.println("Enter the id for which you want to update data :");
+               int id = sc.nextInt();
+               System.out.println("Enter the updated first name : ");
+                    String firstname=sc.next();
+                    System.out.println("Enter the updated last name : ");
+                    String lastname=sc.next();
+                    System.out.println("Enter the updated age : ");
+                    int age= sc.nextInt();
+                    int result=stmt.executeUpdate("update registration set FIRST_NAME="+"'"+firstname+"',"+" LAST_NAME="+"'"+lastname+"',"+" AGE="+age+" where ID="+id);
+                    if(result >0)
+                        System.out.println("Sucessfully   updated...");
+                    else
+                        System.out.println("Unsucessul update...");
+           }       
+             break;
+           case 3:
+           {
+               System.out.println("Enter the id :");
+               int id=sc.nextInt();
+               int result=stmt.executeUpdate("delete from registration where ID ="+id);
+               if(result >0)
+                        System.out.println("Sucessfully deleted...");
+                    else
+                        System.out.println("Unsucessul deleted...");
+           }
+               break;
+           case 4:
+           {
+              System.out.println("Enter the id :");
+               int id=sc.nextInt();
+               ResultSet rs=stmt.executeQuery("select*from registration where ID="+id);
+               while(rs.next()){
+                   System.out.println(rs.getInt("ID")+" "+rs.getString("FIRST_NAME")+" "+rs.getString("LAST_NAME")+" "+rs.getInt("AGE"));
+                 }
+               }
+               break;
+           default:
+           {
+               System.out.println("Enter the valid case");
+           }
+               break;
+        }
+        con.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+        
+    }
+}
